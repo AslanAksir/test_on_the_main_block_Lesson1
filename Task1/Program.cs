@@ -12,7 +12,9 @@ int anyNumberInput() //Ввод числа с консоли. Проверка �
 
         for (int i = 0; i < inputString.Length; i++)
         {
-            if (Convert.ToInt32(inputString[i]) > Convert.ToInt32('9') || Convert.ToInt32(inputString[i]) < Convert.ToInt32('1'))
+            if (i == 0 && Convert.ToInt32(inputString[i]) <= Convert.ToInt32('0'))
+                break;
+            if (Convert.ToInt32(inputString[i]) > Convert.ToInt32('9') || Convert.ToInt32(inputString[i]) < Convert.ToInt32('0'))
             {
                 break;
             }
@@ -27,7 +29,7 @@ int anyNumberInput() //Ввод числа с консоли. Проверка �
 
 
 
-string[] CreateDifferenceLengthStringArray(int arraySize, int minStringSize, int maxStringSize, string stringSource)
+string[] CreateDifferenceLengthStringArray(int arraySize, int minStringSize, int maxStringSize, string stringSource)//Создание случайного массива строк
 {
     string[] array = new string[arraySize];
     Random rnd = new Random();
@@ -54,10 +56,10 @@ void PrintArray(string[] array)
 }
 
 //Вычисление количества строк в массиве длина которых меньше либо равна 3
-int amountMemberArrayLessThanThree(string[] array)
+int amountMemberArrayLessThanThree(string[] array, int Criteria)
 {
     int k = 0;
-    int Criteria = 3;
+    // int Criteria = 3;
     for (int i = 0; i < array.Length; i++)
         if (array[i].Length <= Criteria)
             k = k + 1;
@@ -66,31 +68,32 @@ int amountMemberArrayLessThanThree(string[] array)
 }
 
 //Формирование массива строк длина которых меньше либо равна 3
-string[] arrayFiltred(string[] array, int k)
+string[] arrayFiltred(string[] array, int cond, int k)
 {
-    string[] arrayFF = new string[1];
-    arrayFF[0] = "В массиве нет строк длины меньше либо равно 3";
+    string[] arrayF = new string[k];
     if (k == 0)
     {
-        return arrayFF;
+        Console.WriteLine("В массиве нет строк длины меньше либо равно 3");
+        return arrayF;
     }
-    string[] arrayF = new string[k];
 
-    int Criteria = 3;
+    // int Criteria = 3;
     int j = 0;
     for (int i = 0; i < array.Length; i++)
     {
-        if (array[i].Length <= Criteria)
+        if (array[i].Length <= cond)
         {
             arrayF[j] = array[i];
             j = j + 1;
         }
-
     }
+    PrintArray(arrayF); // Вывод искомого массива на печать
+    Console.WriteLine($"Строки массива, длина которых меньше либо равна 3");
+
     return arrayF;
 }
 
-int inputArrayMaxStringSize(int minStringSize)
+int inputArrayMaxStringSize(int minStringSize)//Ввод максимального значения длины строк массива больше либо равного минимальному
 {
     int MaxStringSize = minStringSize - 1;
     while (minStringSize > MaxStringSize)
@@ -103,21 +106,33 @@ int inputArrayMaxStringSize(int minStringSize)
     return MaxStringSize;
 }
 
+string[] randomArrayBilding()//Построение  массива строк заданного размера со случаной длиной строк в заданных пределах
+{
+    string stringSource = "1234567890qwertyuiop[]\asdfghjkl;'zxcvbnm,./!@#$%^&*()_+-=~`"; /* Строка символов из которых 
+    случайным образом формируется массив строк для задачи */
+    Console.WriteLine("Введите размер массива строк"); int arraySize = anyNumberInput();
+    Console.WriteLine("Введите МИНИМАЛЬНО возможную длину строки"); int minStringSize = anyNumberInput();
+    int maxStringSize = inputArrayMaxStringSize(minStringSize); //Введение максимально возможной длины строки
+    string[] stringArray = CreateDifferenceLengthStringArray(arraySize, minStringSize, maxStringSize, stringSource);/*Создание
+     массива с заданными значениями размера массива и максимальной и минимальной длин строк в массиве*/
+    Console.WriteLine();
+    PrintArray(stringArray); // Вывод массива на консоль 
+    Console.WriteLine($" Первоначальный массив строк");
+    return stringArray;
+}
+
+string[] arrayFiltredBuilding(string[] stringArray, int cond)//Построение массива строк с длинной строк не более трех
+{
+    int arrayFiltredStringAmount = amountMemberArrayLessThanThree(stringArray, cond); //Вычисление количества строк в массиве длины меньше либо равной 3
+    string[] arrayF = arrayFiltred(stringArray, cond, arrayFiltredStringAmount); //Получение искомого массива, содержащего строки длины менее либо равно 3
+    // Console.WriteLine($"Строки массива, длина которых меньше либо равна 3");
+    // PrintArray(arrayF); // Вывод искомого массива на печать
+    return arrayF;
+}
+
 //Main program
+string[] stringArray = randomArrayBilding();/*Построение случайного массива строк с заданными с консоли длиной массива и случайной
+длиной строк из интеравала натуральных чисел*/
+string[] arrayFiltredSizeLessThree = arrayFiltredBuilding(stringArray, 3);//Получение массива строк, длина который меньше либо равна 3
 
-string stringSource = "1234567890qwertyuiop[]\asdfghjkl;'zxcvbnm,./!@#$%^&*()_+-=~`"; /* Строка символов из которых случайным образом формируется 
-массив строк для задачи */
-Console.WriteLine("Введите размер массива строк"); int arraySize = anyNumberInput();
-Console.WriteLine("Введите МИНИМАЛЬНО возможную длину строки"); int minStringSize = anyNumberInput();
-int maxStringSize = inputArrayMaxStringSize(minStringSize); //Введение максимально возможной длины строки
 
-string[] stringArray = CreateDifferenceLengthStringArray(arraySize, minStringSize, maxStringSize, stringSource);/*Создание
-произвольного массива с заданными значениями размера массива максимальной и минимальной длин строк в массиве*/
-Console.WriteLine();
-PrintArray(stringArray); // Вывод массива на консоль 
-Console.WriteLine($" Первоначальный массив строк");
-// int arrayFiltredStringAmount = amountMemberArrayLessThanThree(array); //Вычисление количества строк в массиве длины меньше либо равной 3
-int arrayFiltredStringAmount = amountMemberArrayLessThanThree(stringArray); //Вычисление количества строк в массиве длины меньше либо равной 3
-string[] arrayF = arrayFiltred(stringArray, arrayFiltredStringAmount); //Получение искомого массива, содержащего строки длины менее либо равно 3
-PrintArray(arrayF); // Вывод искомого массива на печать
-Console.WriteLine($" Строки массива, длина которых меньше либо равна 3");
