@@ -86,7 +86,15 @@ string[] arrayFiltred(string[] array, int cond, int k)
             arrayF[j] = array[i];
             j = j + 1;
         }
+        else
+        {
+            array[i] = String.Concat(Enumerable.Repeat(" ", array[i].Length));
+        }
     }
+
+    PrintArray(array); // Вывод искомого массива на печать
+    Console.WriteLine($"Строки массива, длина которых меньше черырех");
+
     PrintArray(arrayF); // Вывод искомого массива на печать
     Console.WriteLine($"Строки массива, длина которых меньше либо равна 3");
 
