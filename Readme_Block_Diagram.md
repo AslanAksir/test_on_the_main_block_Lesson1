@@ -24,10 +24,10 @@
 
 
 5. Блок-схема `int amountMemberArrayLessThanThree(string[] array, int Cond)`: данная функция вычисляет количество строк в заданном массиве, длина которых меньше или равна указанному критерию ("cond"). Она перебирает элементы массива и просчитывает соответствующие строки
-<p align="center"><img width="400" height="400" src="picture4.png"> <img width="400"</p>
+<p align="center"><img width="400" height="400" src="picture4.png"> </p>
 
 6. Блок-схема функции `string[] arrayFiltred(string[] array, int cond, int k)`: эта функция фильтрует входной массив на основе условия (`< cond`) по длине строки. Он создает новый массив, содержащий только строки, соответствующие условию. Он также заменяет строки, не соответствующие условию, пробелами в исходном массиве. Затем он выводит на консоль исходный и отфильтрованный массивы.
-<p align="center"><img width="600" height="500" src="picture5.png"> <img width="400"</p>
+<p align="center"><img width="600" height="500" src="picture5.png"> </p>
 
 7. Блок-схема функции `void PrintArray(string[] array)`: эта функция выводит содержимое массива строк на консоль
 <p align="center"><img width="250" height="300" src="picture6.png">"</p>
