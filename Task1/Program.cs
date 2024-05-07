@@ -93,7 +93,7 @@ string[] arrayFiltred(string[] array, int cond, int k)
     }
 
     PrintArray(array); // Вывод искомого массива на печать
-    Console.WriteLine($"Строки массива, длина которых меньше черырех");
+    Console.WriteLine($"Вывод исходного массива, без строк длины > 3");
 
     PrintArray(arrayF); // Вывод искомого массива на печать
     Console.WriteLine($"Строки массива, длина которых меньше либо равна 3");
